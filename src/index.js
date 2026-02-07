@@ -1,10 +1,15 @@
-import {PORT} from "./config/index.js";
-import express from "express"
-import apiRoutes from './routes/index.js'
-const app=express();
-console.log("MAIN SERVER FILE LOADED");
+// server.js
+const { PORT } = require('./config/index.js');
+const express = require('express');
+const apiRoutes = require('./routes/index.js');
 
-app.use("/api",apiRoutes);
-app.listen(PORT,()=>{
-  console.log(`Serever is running on port no ${PORT}`)
-})
+const app = express();
+
+console.log("MAIN SERVER FILE LOADED");
+app.use(express.json());
+app.use(express.urlencoded());
+app.use('/api', apiRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port no ${PORT}`);
+});

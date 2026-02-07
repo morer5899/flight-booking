@@ -1,9 +1,13 @@
-import { StatusCodes } from "http-status-codes";
+const { StatusCodes } = require('http-status-codes');
 
-export const info=(req,res)=>{
+const info = (req, res) => {
   try {
-    return res.status(StatusCodes.OK).json({message:"OK",success:true})
+    return res.status(StatusCodes.OK).json({ message: "OK", success: true });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
+
+module.exports = {
+  info
+};

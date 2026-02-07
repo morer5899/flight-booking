@@ -1,7 +1,9 @@
-import express from "express";
-import { info } from "../../controllers/index.js";
-const router=express.Router();
-console.log("info route");
-router.get("/info",info)
+const express = require('express');
+const { info } = require('../../controllers/index.js'); // CommonJS require
+const airplaneRouts=require("./airplane-routs.js")
+const router = express.Router();
 
-export default router;
+router.use("/airplane",airplaneRouts);
+router.get('/info', info); // Note: use the correct variable name 'info'
+
+module.exports = router;
