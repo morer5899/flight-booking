@@ -28,7 +28,7 @@ async function createAirplane(data) {
         }
 
     }
-    throw new AppError("Cannot create a new Airplane object",StatusCodes.INTERNAL_SERVER_ERROR);
+    throw new AppError("Cannot get airplanes",StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 
@@ -41,7 +41,39 @@ const getAirplanes=async()=>{
   }
 }
 
+const getAirplane=async(id)=>{
+  try {
+    const airplane=await airplaneRepository.get(id);
+    return airplane;
+  } catch (error) {
+     if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        "The airplane you requested is not present",
+        StatusCodes.NOT_FOUND
+      );
+    }
+    throw new AppError("Cannot get airplane",StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
+const destroyAirplane=async(id)=>{
+   try {
+    const airplane=await airplaneRepository.destroy(id);
+    return airplane;
+  } catch (error) {
+     if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        "The airplane you requested to destroy is not present",
+        StatusCodes.NOT_FOUND
+      );
+    }
+    throw new AppError("Cannot get airplane",StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
 module.exports = {
   createAirplane,
-  getAirplanes
+  getAirplanes,
+  getAirplane,
+  destroyAirplane
 }

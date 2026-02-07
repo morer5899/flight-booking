@@ -1,5 +1,6 @@
-const { createAirplane, getAirplanes } = require("./airplane-service");
+const { createAirplane, getAirplanes, getAirplane, destroyAirplane } = require("./airplane-service");
 
 module.exports={
-  AirplaneService:{createAirplane,getAirplanes}
+  AirplaneService:{
+    createAirplane,getAirplanes,getAirplane,destroyAirplane}
 }

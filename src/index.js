@@ -7,7 +7,7 @@ const app = express();
 
 console.log("MAIN SERVER FILE LOADED");
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 app.use('/api', apiRoutes);
 
 app.listen(PORT, () => {
