@@ -2,10 +2,9 @@ const { StatusCodes } = require("http-status-codes");
 const { ErrorResponse } = require("../utils/common");
 const AppError = require("../utils/errors/app-error");
 function validateCreateResponse(req, res, next) {
-
-  if (!req.body.modelNumber) {
-    const message = "Something went wrong while creating airplane";
-    const error = new AppError(["Model Number not found in the incoming request"], StatusCodes.BAD_REQUEST);
+  if (!req.body.name) {
+     const message = "Something went wrong while creating city";
+    const error = new AppError(["City name not found in the incoming request"], StatusCodes.BAD_REQUEST);
     return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse(error,message));
   }
   next();

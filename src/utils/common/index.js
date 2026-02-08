@@ -1,20 +1,21 @@
 // const { error } = require("./error-response");
 // const { success } = require("./success-response");
 
-module.exports={
-  ErrorResponse:(err) => ({
+module.exports = {
+  ErrorResponse: (err, message = "something went wrong") => ({
     success: false,
-    message: "something went wrong",
+    message,
     data: {},
     error: {
       statusCode: err.statusCode,
       explanation: err.explanation || err.message
     }
   }),
-  SuccessResponse:(data) => ({
+
+  SuccessResponse: (data, message = "successfully completed the request") => ({
     success: true,
-    message: "successfully completed the request",
+    message,
     data,
     error: {}
   }),
-}
+};

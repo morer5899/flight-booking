@@ -1,6 +1,6 @@
 // const { where } = require("sequelize");
 // const { Logger } = require("../config");
-
+const { Op } = require("sequelize");
 const { StatusCodes } = require("http-status-codes");
 const AppError = require("../utils/errors/app-error");
 
@@ -22,7 +22,6 @@ class Crudrepository {
       }
     })
     if (!res) {
-      // console.log("getError==>", res)
       throw new AppError("not able to find resource", StatusCodes.NOT_FOUND);
     }
     return res;
@@ -34,6 +33,23 @@ class Crudrepository {
       throw new AppError("not able to find resource", StatusCodes.NOT_FOUND);
     }
     return res;
+  }
+
+  async getByName(name) {
+    const cities = await this.model.findAll({
+      where: {
+        name: {
+          [Op.like]: `${name}%`
+        }
+      }
+    });
+    if (!cities || cities.length === 0) {
+      throw new AppError(
+        "No cities found matching the search",
+        StatusCodes.NOT_FOUND
+      );
+    }
+    return cities;
   }
 
   async getAll() {
@@ -48,8 +64,8 @@ class Crudrepository {
         id: id
       }
     });
-    
-    if (res[0]==0) {
+
+    if (res[0] == 0) {
       throw new AppError("not able to find resource", StatusCodes.NOT_FOUND);
     }
     return res;

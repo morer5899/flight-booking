@@ -37,7 +37,7 @@ const getAirplanes=async()=>{
     const airplanes=await airplaneRepository.getAll();
     return airplanes;
   } catch (error) {
-     throw new AppError("Cannot create a new Airplane object",StatusCodes.INTERNAL_SERVER_ERROR);
+     throw new AppError("Cannot get airplanes",StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 
